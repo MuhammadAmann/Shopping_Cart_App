@@ -20,7 +20,7 @@ class _Product_ListState extends State<Product_List> {
   var count_p = 3;
   List<String> productname = [
     "Mango",
-    "Banan",
+    "Banana",
     "Apple",
     "Pineapple",
     "Strawberry",

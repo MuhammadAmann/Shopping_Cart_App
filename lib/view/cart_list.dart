@@ -62,117 +62,106 @@ class _Cart_ListState extends State<Cart_List> {
             itemCount: 3,
             itemBuilder: (context, index) {
               return InkWell(
-                // onTap: () {
-                //   Navigator.push(context,
-                //       MaterialPageRoute(builder: (context) => Detail_Screen(
-                //                                   product_Images: productImages[index].toString(),
-                //                 product_name: productname[index].toString(),
-                //                 product_price: productprice[index].toString(),
-                //                 product_units: productunits[index].toString(),
-                //       )));
-                // },
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Detail_Screen(
-                              product_Images: widget.p_image[index].toString(),
-                              product_name: widget.p_name[index].toString(),
-                              product_price: widget.p_price[index].toString(),
-                              product_units: widget.p_unit[index].toString()),
-                        ));
-                  },
-                  child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Image(
-                                    height: 90,
-                                    width: 90,
-                                    image: NetworkImage(
-                                        widget.p_image[index].toString())),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * .02,
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Detail_Screen(
+                            product_Images: widget.p_image[index].toString(),
+                            product_name: widget.p_name[index].toString(),
+                            product_price: widget.p_price[index].toString(),
+                            product_units: widget.p_unit[index].toString()),
+                      ));
+                },
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Image(
+                                  height: 90,
+                                  width: 90,
+                                  image: NetworkImage(
+                                      widget.p_image[index].toString())),
+                              SizedBox(
+                                width:
+                                    MediaQuery.of(context).size.width * .02,
+                              ),
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      widget.p_name[index].toString(),
+                                      style: TextStyle(
+                                          fontFamily: 'sfpro_font',
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    SizedBox(
+                                        height: MediaQuery.of(context)
+                                                .size
+                                                .width *
+                                            .02),
+                                    Text(
+                                      "Rs. " +
+                                          widget.p_price[index].toString() +
+                                          "/" +
+                                          widget.p_unit[index].toString(),
+                                    ),
+                                  ],
                                 ),
-                                Expanded(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        widget.p_name[index].toString(),
-                                        style: TextStyle(
-                                            fontFamily: 'sfpro_font',
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              .02),
-                                      Text(
-                                        "Rs. " +
-                                            widget.p_price[index].toString() +
-                                            "/" +
-                                            widget.p_unit[index].toString(),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                    height: 35,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                        color: primarycolor,
-                                        borderRadius: BorderRadius.circular(6)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          InkWell(
+                              ),
+                              Container(
+                                  height: 35,
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                      color: primarycolor,
+                                      borderRadius: BorderRadius.circular(6)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            p_count--;
+                                            setState(() {});
+                                          },
+                                          child: Icon(
+                                            Icons.remove,
+                                            color: textcolor,
+                                          ),
+                                        ),
+                                        Text(
+                                          p_count.toString(),
+                                          style: TextStyle(color: textcolor),
+                                        ),
+                                        InkWell(
                                             onTap: () {
-                                              p_count--;
+                                              p_count++;
                                               setState(() {});
                                             },
-                                            child: Icon(
-                                              Icons.remove,
-                                              color: textcolor,
-                                            ),
-                                          ),
-                                          Text(
-                                            p_count.toString(),
-                                            style: TextStyle(color: textcolor),
-                                          ),
-                                          InkWell(
-                                              onTap: () {
-                                                p_count++;
-                                                setState(() {});
-                                              },
-                                              child: Icon(Icons.add,
-                                                  color: textcolor))
-                                        ],
-                                      ),
-                                    ))
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+                                            child: Icon(Icons.add,
+                                                color: textcolor))
+                                      ],
+                                    ),
+                                  ))
+                            ],
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 ),
