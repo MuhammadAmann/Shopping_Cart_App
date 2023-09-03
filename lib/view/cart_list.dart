@@ -19,40 +19,7 @@ class Cart_List extends StatefulWidget {
 
 class _Cart_ListState extends State<Cart_List> {
   int p_count = 1;
-  // List<String> productname = [
-  //   "Mango",
-  //   "Banan",
-  //   "Apple",
-  //   "Pineapple",
-  //   "Strawberry",
-  //   "Grapes",
-  //   "Annar",
-  //   "Orange",
-  //   "Mixed Fruit Basket"
-  // ];
-  // List<String> productunits = [
-  //   "Kg",
-  //   "Dozen",
-  //   "Kg",
-  //   "Kg",
-  //   "Kg",
-  //   "Kg",
-  //   "Kg",
-  //   "Dozen",
-  //   "Kg"
-  // ];
-  // List<String> productprice = [
-  //   "120",
-  //   "80",
-  //   "150",
-  //   "190",
-  //   "70",
-  //   "130",
-  //   "90",
-  //   "300",
-  //   "450"
-  // ];
-  // List<String> productImages = [
+
   //   "https://img.freepik.com/free-photo/mango-peeled-cut-into-squares_1220-247.jpg?size=626&ext=jpg&uid=R27160915&ga=GA1.2.438186149.1689966725&semt=ais",
   //   "https://img.freepik.com/free-photo/yellow-banana-fruit_1203-7489.jpg?w=740&t=st=1693477621~exp=1693478221~hmac=571a6783faba179f3c5b8113ef538a37f51a80bc5d14fa4b7361ca9ebd4289eb",
   //   "https://img.freepik.com/free-photo/close-up-fresh-apple_144627-14640.jpg?size=626&ext=jpg&uid=R27160915&ga=GA1.2.438186149.1689966725&semt=sph",
@@ -104,92 +71,108 @@ class _Cart_ListState extends State<Cart_List> {
                 //                 product_units: productunits[index].toString(),
                 //       )));
                 // },
-                child: Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Image(
-                                  height: 90,
-                                  width: 90,
-                                  image: NetworkImage(
-                                      widget.p_image[index].toString())),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width * .02,
-                              ),
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      widget.p_name[index].toString(),
-                                      style: TextStyle(
-                                          fontFamily: 'sfpro_font',
-                                          fontWeight: FontWeight.w700),
-                                    ),
-                                    SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.width *
-                                                .02),
-                                    Text(
-                                      "Rs. " +
-                                          widget.p_price[index].toString() +
-                                          "/" +
-                                          widget.p_unit[index].toString(),
-                                    ),
-                                  ],
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Detail_Screen(
+                              product_Images: widget.p_image[index].toString(),
+                              product_name: widget.p_name[index].toString(),
+                              product_price: widget.p_price[index].toString(),
+                              product_units: widget.p_unit[index].toString()),
+                        ));
+                  },
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Image(
+                                    height: 90,
+                                    width: 90,
+                                    image: NetworkImage(
+                                        widget.p_image[index].toString())),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * .02,
                                 ),
-                              ),
-                              Container(
-                                  height: 35,
-                                  width: 100,
-                                  decoration: BoxDecoration(
-                                      color: primarycolor,
-                                      borderRadius: BorderRadius.circular(6)),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        InkWell(
-                                          onTap: () {
-                                            p_count--;
-                                            setState(() {});
-                                          },
-                                          child: Icon(
-                                            Icons.remove,
-                                            color: textcolor,
-                                          ),
-                                        ),
-                                        Text(
-                                          p_count.toString(),
-                                          style: TextStyle(color: textcolor),
-                                        ),
-                                        InkWell(
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        widget.p_name[index].toString(),
+                                        style: TextStyle(
+                                            fontFamily: 'sfpro_font',
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .02),
+                                      Text(
+                                        "Rs. " +
+                                            widget.p_price[index].toString() +
+                                            "/" +
+                                            widget.p_unit[index].toString(),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                    height: 35,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                        color: primarycolor,
+                                        borderRadius: BorderRadius.circular(6)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          InkWell(
                                             onTap: () {
-                                              p_count++;
+                                              p_count--;
                                               setState(() {});
                                             },
-                                            child: Icon(Icons.add,
-                                                color: textcolor))
-                                      ],
-                                    ),
-                                  ))
-                            ],
-                          ),
-                        )
-                      ],
+                                            child: Icon(
+                                              Icons.remove,
+                                              color: textcolor,
+                                            ),
+                                          ),
+                                          Text(
+                                            p_count.toString(),
+                                            style: TextStyle(color: textcolor),
+                                          ),
+                                          InkWell(
+                                              onTap: () {
+                                                p_count++;
+                                                setState(() {});
+                                              },
+                                              child: Icon(Icons.add,
+                                                  color: textcolor))
+                                        ],
+                                      ),
+                                    ))
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),

@@ -49,7 +49,7 @@ class _Detail_ScreenState extends State<Detail_Screen> {
                 //   padding: const EdgeInsets.all(0),
                 //   child: Divider(),
                 // ),
-                SizedBox(height: 4),
+                SizedBox(height: MediaQuery.of(context).size.height * .04),
 
                 //Detail container for lower detail of the product
                 Padding(
@@ -138,6 +138,8 @@ class _Detail_ScreenState extends State<Detail_Screen> {
                         Text("Product Detail",
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold)),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * .005),
                         ReadMoreText(
                           "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.",
                           trimMode: TrimMode.Line,
