@@ -65,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: MediaQuery.of(context).size.height * .04,
                 ),
                 TextFormField(
-                  obscureText: false,
+                  obscureText: true,
                   controller: passwordcontroller,
                   decoration: InputDecoration(
                       prefixIcon: Icon(
@@ -98,7 +98,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       sp.setString('password', passwordcontroller.text);
                       sp.setBool('islogin', true);
 
-                      if (iscreated == true && sp.getString('email') == email &&
+                      if (sp.getString('email')!.isNotEmpty &&
+                          sp.getString('password')!.isNotEmpty &&
+                          iscreated == true &&
+                          sp.getString('email') == email &&
                           sp.getString('password') == password) {
                         print('login successfully');
                         Navigator.push(
@@ -110,7 +113,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   email: emailcontroller.text.toString()),
                             ));
                       } else {
-                        
                         print("PLease try again");
                       }
                     }),

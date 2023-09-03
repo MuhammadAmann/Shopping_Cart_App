@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_cart/view/detail_Screen.dart';
 import 'package:shopping_cart/view/login.dart';
 import 'package:shopping_cart/view/product_list.dart';
 import 'package:shopping_cart/view/splash_screen.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: Splash_Screen(),
     );
   }
 }

@@ -108,6 +108,7 @@ class _Signup_ScreenState extends State<Signup_Screen> {
                 height: MediaQuery.of(context).size.height * .03,
               ),
               TextFormField(
+                obscureText: true,
                 controller: passwordcontroller,
                 decoration: InputDecoration(
                     prefixIcon: Icon(

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopping_cart/Utils/colors.dart';
 import 'package:shopping_cart/view/cart_list.dart';
+import 'package:shopping_cart/view/detail_Screen.dart';
 import 'package:shopping_cart/view/login.dart';
 
 class Product_List extends StatefulWidget {
-  dynamic email, f_name, l_name;
+  final dynamic email, f_name, l_name;
   Product_List(
       {super.key,
       required this.email,
@@ -16,7 +17,7 @@ class Product_List extends StatefulWidget {
 }
 
 class _Product_ListState extends State<Product_List> {
-  var count = 3;
+  var count_p = 3;
   List<String> productname = [
     "Mango",
     "Banan",
@@ -73,13 +74,19 @@ class _Product_ListState extends State<Product_List> {
           Center(
             child: Badge(
               backgroundColor: primarycolor,
-              label: Text(count.toString()),
+              label: Text(count_p.toString()),
               child: InkWell(
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Cart_List(),
+                        builder: (context) => new Cart_List(
+                          count: count_p,
+                          p_image: productImages,
+                          p_name: productname,
+                          p_price: productprice,
+                          p_unit: productunits,
+                        ),
                       ));
                 },
                 child: Icon(
@@ -101,25 +108,36 @@ class _Product_ListState extends State<Product_List> {
                   backgroundImage: NetworkImage(
                       'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1378&q=80'),
                 ),
-                accountName: Text(widget.f_name + widget.l_name),
+                accountName: Text(widget.f_name + " " + widget.l_name),
                 accountEmail: Text(widget.email)),
             ListTile(
-              leading: Icon(Icons.shopping_bag_outlined),
+              leading: Icon(Icons.shopping_bag_outlined, color: primarycolor),
               title: Text("Cart List"),
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Cart_List(),
+                      builder: (context) => Cart_List(
+                        count: count_p,
+                        p_image: productImages,
+                        p_name: productname,
+                        p_price: productprice,
+                        p_unit: productunits,
+                      ),
                     ));
               },
             ),
             ListTile(
-              leading: Icon(Icons.logout),
+              leading: Icon(Icons.privacy_tip, color: primarycolor),
+              title: Text("Privacy Policy"),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.logout, color: primarycolor),
               title: Text("Log out"),
               onTap: () async {
                 SharedPreferences sp = await SharedPreferences.getInstance();
-                
+
                 sp.clear();
                 Navigator.pushReplacement(
                     context,
@@ -138,74 +156,94 @@ class _Product_ListState extends State<Product_List> {
               child: ListView.builder(
             itemCount: productname.length,
             itemBuilder: (context, index) {
-              return Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Image(
-                                height: 90,
-                                width: 90,
-                                image: NetworkImage(
-                                    productImages[index].toString())),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * .02,
-                            ),
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    productname[index].toString(),
-                                    style: TextStyle(
-                                        fontFamily: 'sfpro_font',
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                  SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.width *
-                                              .02),
-                                  Text(
-                                    "Rs. " +
-                                        productprice[index].toString() +
-                                        "/" +
-                                        productunits[index].toString(),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                count++;
-                                setState(() {});
-                              },
-                              child: Container(
-                                height: 35,
-                                width: 100,
-                                decoration: BoxDecoration(
-                                    color: primarycolor,
-                                    borderRadius: BorderRadius.circular(6)),
-                                child: Center(
-                                    child: Text(
-                                  "Add to cart",
-                                  style: TextStyle(color: textcolor),
-                                )),
-                              ),
-                            )
-                          ],
+              return InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Detail_Screen(
+                          product_Images: productImages[index].toString(),
+                          product_name: productname[index].toString(),
+                          product_price: productprice[index].toString(),
+                          product_units: productunits[index].toString(),
                         ),
-                      )
-                    ],
+                      ));
+                },
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Image(
+                                  height: 90,
+                                  width: 90,
+                                  image: NetworkImage(
+                                      productImages[index].toString())),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * .02,
+                              ),
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      productname[index].toString(),
+                                      style: TextStyle(
+                                          fontFamily: 'sfpro_font',
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                .02),
+                                    Text(
+                                      "Rs. " +
+                                          productprice[index].toString() +
+                                          "/" +
+                                          productunits[index].toString(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  count_p++;
+                                  setState(() {});
+                                },
+                                child: InkWell(
+                                  onTap: () {
+                                    count_p++;
+                                    setState(() {});
+                                  },
+                                  child: Container(
+                                    height: 35,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                        color: primarycolor,
+                                        borderRadius: BorderRadius.circular(6)),
+                                    child: Center(
+                                        child: Text(
+                                      "Add to cart",
+                                      style: TextStyle(color: textcolor),
+                                    )),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               );
